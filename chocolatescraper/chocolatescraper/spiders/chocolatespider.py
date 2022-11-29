@@ -1,4 +1,6 @@
 import scrapy
+from chocolatescraper.items import ChocolatescraperItem
+from chocolatescraper.itemloaders import ChocolateProductLoader
 
 
 class ChocolatespiderSpider(scrapy.Spider):
@@ -11,12 +13,13 @@ class ChocolatespiderSpider(scrapy.Spider):
      products = response.css('product-item')
 
      for product in products:
-         yield{
-             
-        "title": product.css('a.product-item-meta__title::text').get(),
-        "price": product.css('span.price').get().replace('<span class="price">\n              <span class="visually-hidden">Sale price</span>','').replace('</span>',''),
-        "url":   product.css('div.product-item-meta a').attrib['href']
-         }
+         
+         #populate item pipeline + item loader for data cleasing
+         chocolate = ChocolateProductLoader(ChocolatescraperItem(), seletor= product),
+         chocolate.add_css('title', 'a.product-item-meta__title::text').get(),
+         chocolate.add_css('price', 'span.price').get().replace('<span class="price">\n              <span class="visually-hidden">Sale price</span>','').replace('</span>',''),
+         chocolate.add_csss('url', 'div.product-item-meta a').attrib['href']
+         yield chocolate.load_item()
         
      next_page = response.css('[rel="next"] ::attr(href)').get()
      if next_page is not None:
