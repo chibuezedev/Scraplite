@@ -13,3 +13,10 @@
 
 
  Part 2: Cleaning Dirty Data & Dealing With Edge Cases
+
+ - Save data to S3 bucket
+  'scrapy crawl chocolatespider -O s3://aws_key:aws_secret@mybucket/path/to/myscrapeddata.csv:csv'
+
+- create a file
+pip freeze requirements.txt > requirements.txt
+

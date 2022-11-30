@@ -19,6 +19,45 @@ NEWSPIDER_MODULE = 'chocolatescraper.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+# AWS_ACCESS_KEY_ID = 'myaccesskeyhere'
+# AWS_SECRET_ACCESS_KEY = 'mysecretkeyhere'
+
+#MONGO CONNECTION
+MONGO_URI = 'mongodb+srv://Paul:y9DSqyzD8uiQ9n8g@node-class.iz8y6zp.mongodb.net'
+MONGO_DATABASE = 'scrapy'
+
+# Add Your ScrapeOps API key
+
+SCRAPEOPS_API_KEY = '2bdeae7a-75d6-4dc4-a726-bfbff5c29bed'
+
+ITEM_PIPELINES = {
+   
+    'chocolatescraper.pipelines.PriceToUSDPipeline': 100,
+    'chocolatescraper.pipelines.DuplicatesPipeline': 200,
+    'chocolatescraper.pipelines.SavingToMongoDbPipeline': 300,
+}
+
+# Enable or disable downloader middlewares
+# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
+DOWNLOADER_MIDDLEWARES = {
+    # 'chocolatescraper.middlewares.ChocolatescraperDownloaderMiddleware': 543,
+    # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    # 'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+    
+    #     ## Rotating Free Proxies
+    # 'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
+    # 'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
+    
+    'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+}
+
+# Enable or disable extensions
+# See https://docs.scrapy.org/en/latest/topics/extensions.html
+EXTENSIONS = {
+   'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500,
+}
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -48,25 +87,11 @@ ROBOTSTXT_OBEY = False
 #    'chocolatescraper.middlewares.ChocolatescraperSpiderMiddleware': 543,
 #}
 
-# Enable or disable downloader middlewares
-# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'chocolatescraper.middlewares.ChocolatescraperDownloaderMiddleware': 543,
-#}
 
-# Enable or disable extensions
-# See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
-#    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   
-    'chocolatescraper.pipelines.PriceToUSDPipeline': 100,
-    'chocolatescraper.pipelines.DuplicatesPipeline': 200,
-}
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

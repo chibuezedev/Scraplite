@@ -1,0 +1,7 @@
+scrapeops-scrapy==0.5.2
+Scrapy==2.6.3
+scrapy-proxy-pool==0.1.9
+scrapy-user-agents==0.1.1
+pymongo==4.3.2
+scrapeops-scrapy-proxy-sdk==0.22
+
