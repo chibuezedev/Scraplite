@@ -15,9 +15,31 @@ NEWSPIDER_MODULE = 'amazonscraper.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'amazonscraper (+http://www.yourdomain.com)'
-
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
+
+SCRAPEOPS_API_KEY = '2bdeae7a-75d6-4dc4-a726-bfbff5c29bed'
+
+SCRAPEOPS_PROXY_ENABLED = True
+
+# Add In The ScrapeOps Monitoring Extension
+EXTENSIONS = {
+'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
+}
+
+
+DOWNLOADER_MIDDLEWARES = {
+
+    ## ScrapeOps Monitor
+    'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+    
+    ## Proxy Middleware
+    'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
+}
+
+# Max Concurrency On ScrapeOps Proxy Free Plan is 1 thread
+CONCURRENT_REQUESTS = 1
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
