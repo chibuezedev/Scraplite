@@ -1,11 +1,3 @@
-# Scrapy settings for chocolatescraper project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     https://docs.scrapy.org/en/latest/topics/settings.html
-#     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'chocolatescraper'
 
@@ -23,10 +15,20 @@ ROBOTSTXT_OBEY = False
 # AWS_SECRET_ACCESS_KEY = 'mysecretkeyhere'
 
 #MONGO CONNECTION
-MONGO_URI = 'mongodb+srv://Paul:y9DSqyzD8uiQ9n8g@node-class.iz8y6zp.mongodb.net'
-MONGO_DATABASE = 'scrapy'
+# MONGO_URI = ''
+# MONGO_DATABASE = 'scrapy'
+
+#POSTGRES CONNECTION
+
+# DATABASE_NAME='postgres'
+# DATABASE_USER='postgres'
+# DATABASE_PASSWORD=''
+# DATABASE_HOST=''
+# DATABASE_PORT='5432'
 
 # Add Your ScrapeOps API key
+
+SCRAPEOPS_PROXY_ENABLED = True
 
 SCRAPEOPS_API_KEY = '2bdeae7a-75d6-4dc4-a726-bfbff5c29bed'
 
@@ -34,7 +36,7 @@ ITEM_PIPELINES = {
    
     'chocolatescraper.pipelines.PriceToUSDPipeline': 100,
     'chocolatescraper.pipelines.DuplicatesPipeline': 200,
-    'chocolatescraper.pipelines.SavingToMongoDbPipeline': 300,
+    'chocolatescraper.pipelines.SavingToPostgresPipeline': 300,
 }
 
 # Enable or disable downloader middlewares
@@ -50,16 +52,19 @@ DOWNLOADER_MIDDLEWARES = {
     
     'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+    
+     ## Proxy Middleware
+    'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
 }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-EXTENSIONS = {
-   'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500,
-}
+# EXTENSIONS = {
+#    'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500,
+# }
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay

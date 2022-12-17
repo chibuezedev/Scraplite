@@ -1,7 +1,50 @@
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
-import pymongo
 
+## Storing to DB
+import psycopg2 ## Postgres
+
+class SavingToPostgresPipeline(object):
+    
+    def __init__(self):
+        self.create_connection()
+
+
+    def create_connection(self):
+        self.connection = psycopg2.connect(
+            host="",
+            database="postgres",
+            user="postgres",
+            password="")
+        
+        self.curr = self.connection.cursor()
+        
+    def close_spider(self, spider):
+        self.curr.close()
+        self.connection.close()
+
+    def process_item(self, item, spider):
+        self.store_db(item)
+        #we need to return the item below as scrapy expects us to!
+        return item
+        
+
+    def store_db(self, item):
+        try:
+           self.curr.execute("insert into chocolate_products (name, price, url) values(%s,%s,%s)", (
+            item["name"],
+            str(item["price"]),
+            item["url"]
+        ))
+           self.connection.commit()
+        except:
+              self.connection.rollback()
+              raise
+        return item
+        
+    
+
+        
 
 class PriceToUSDPipeline:
 
@@ -34,29 +77,4 @@ class DuplicatesPipeline:
         else:
             self.names_seen.add(adapter['name'])
             return item
-        
 
-class SavingToMongoDbPipeline:
-
-    collection_name = 'scrapy_items'
-
-    def __init__(self, mongo_uri, mongo_db):
-        self.mongo_uri = mongo_uri
-        self.mongo_db = mongo_db
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        return cls(
-            mongo_uri=crawler.settings.get('MONGO_URI'),
-            mongo_db=crawler.settings.get('MONGO_DATABASE', 'items')
-        )
-
-    def open_spider(self, spider):
-        self.client = pymongo.MongoClient(self.mongo_uri)
-        self.db = self.client[self.mongo_db]
-
-    def close_spider(self, spider):
-        self.client.close()
-
-    def process_item(self, item, spider):
-        self.db[self.collection_name].insert_one(ItemAdapter(item).asdict())
