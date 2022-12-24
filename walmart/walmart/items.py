@@ -1,12 +1,21 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
 
 
 class WalmartItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+    keyword = scrapy.Field()
+    page = scrapy.Field()
+    position = scrapy.Field()
+    uniqueId = scrapy.Field()
+    productType = scrapy.Field()
+    name = scrapy.Field()
+    brand = scrapy.Field()
+    averageRating = scrapy.Field()
+    manufacturerName = scrapy.Field()
+    description = scrapy.Field()
+    thumbnailUrl = scrapy.Field()
+    price = scrapy.Field()
+    currencyUnit = scrapy.Field()
     pass
+
+

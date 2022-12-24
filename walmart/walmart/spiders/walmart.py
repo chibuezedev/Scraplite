@@ -5,13 +5,18 @@ from urllib.parse import urlencode
 
 class WalmartSpider(scrapy.Spider):
     name = "walmart"
+    
+    API_KEY = '2bdeae7a-75d6-4dc4-a726-bfbff5c29bed'
 
-    custom_settings = {
-        'FEEDS': { 'data/%(name)s_%(time)s.csv': { 'format': 'csv',}}
-        }
+    def get_proxy_url(url):
+        payload = {'api_key': '2bdeae7a-75d6-4dc4-a726-bfbff5c29bed', 'url': url}
+        proxy_url = 'https://proxy.scrapeops.io/v1/?' + urlencode(payload)
+        return proxy_url
+
+ 
 
     def start_requests(self):
-        keyword_list = ['laptop', 'ipad']
+        keyword_list = ['calvin', 'women']
         for keyword in keyword_list:
             payload = {'q': keyword, 'sort': 'best_seller', 'page': 1, 'affinityOverride': 'default'}
             walmart_search_url = 'https://www.walmart.com/search?' + urlencode(payload)
@@ -51,13 +56,13 @@ class WalmartSpider(scrapy.Spider):
                 'keyword': response.meta['keyword'],
                 'page': response.meta['page'],
                 'position': response.meta['position'],
-                'id':  raw_product_data.get('id'),
-                'type':  raw_product_data.get('type'),
+                'uniqueId':  raw_product_data.get('id'),
+                'productType':  raw_product_data.get('productType'),
                 'name':  raw_product_data.get('name'),
                 'brand':  raw_product_data.get('brand'),
                 'averageRating':  raw_product_data.get('averageRating'),
                 'manufacturerName':  raw_product_data.get('manufacturerName'),
-                'shortDescription':  raw_product_data.get('shortDescription'),
+                'description':  raw_product_data.get('shortDescription'),
                 'thumbnailUrl':  raw_product_data['imageInfo'].get('thumbnailUrl'),
                 'price':  raw_product_data['priceInfo']['currentPrice'].get('price'), 
                 'currencyUnit':  raw_product_data['priceInfo']['currentPrice'].get('currencyUnit'),  

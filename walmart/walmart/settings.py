@@ -40,6 +40,27 @@ DOWNLOADER_MIDDLEWARES = {
 # Max Concurrency On ScrapeOps Proxy Free Plan is 1 thread
 CONCURRENT_REQUESTS = 1
 
+
+# #MONGO CONNECTION
+# MONGO_URI = 'mongodb+srv://Paul:y9DSqyzD8uiQ9n8g@node-class.iz8y6zp.mongodb.net'
+# MONGO_DATABASE = 'scrapy'
+
+# Configure item pipelines
+# See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+ITEM_PIPELINES = {
+    # 'walmart.pipelines.WalmartPipeline': 300,
+#    'walmart.pipelines.DuplicatesPipeline': 200,
+   'walmart.pipelines.SavingToPostgresPipeline': 300,
+   
+#    'walmart.pipelines.SavingToMongoDbPipeline': 300
+}
+
+
+# DATABASE_NAME='postgres'
+# DATABASE_USER='postgres'
+# DATABASE_PASSWORD='CuCBe4Tl9Oe9rm8n4Kcb'
+# DATABASE_HOST='db.cluster-cz5s9muunivd.us-east-1.rds.amazonaws.com'
+# DATABASE_PORT='5432'
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -81,11 +102,7 @@ CONCURRENT_REQUESTS = 1
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
-# Configure item pipelines
-# See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'walmart.pipelines.WalmartPipeline': 300,
-#}
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
