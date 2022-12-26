@@ -18,24 +18,24 @@ NEWSPIDER_MODULE = 'amazonscraper.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
-SCRAPEOPS_API_KEY = '2bdeae7a-75d6-4dc4-a726-bfbff5c29bed'
+# SCRAPEOPS_API_KEY = '2bdeae7a-75d6-4dc4-a726-bfbff5c29bed'
 
-SCRAPEOPS_PROXY_ENABLED = True
+# SCRAPEOPS_PROXY_ENABLED = True
 
 # Add In The ScrapeOps Monitoring Extension
-EXTENSIONS = {
-'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
-}
+# EXTENSIONS = {
+# 'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
+# }
 
 
 DOWNLOADER_MIDDLEWARES = {
 
     ## ScrapeOps Monitor
-    'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
-    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+    # 'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
+    # 'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
     
-    ## Proxy Middleware
-    'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
+    # ## Proxy Middleware
+    # 'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,
     
     # Enable Splash downloader middleware and change HttpCompressionMiddleware priority
     'scrapy_splash.SplashCookiesMiddleware': 723,
