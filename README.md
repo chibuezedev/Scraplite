@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-This advanced web scraper is designed for production-scale data extraction. It utilizes the Scrapy framework and is automated using AWS and Celery.
+Advanced Scrapy Scraper Library, made for production scale. Automated using AWS and Cerery under the hood.
 
 ## Features
 
