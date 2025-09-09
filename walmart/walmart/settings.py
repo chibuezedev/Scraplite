@@ -42,7 +42,7 @@ CONCURRENT_REQUESTS = 1
 
 
 # #MONGO CONNECTION
-# MONGO_URI = 'mongodb+srv://Paul:y9DSqyzD8uiQ9n8g@node-class.iz8y6zp.mongodb.net'
+# MONGO_URI = ''
 # MONGO_DATABASE = 'scrapy'
 
 # Configure item pipelines
