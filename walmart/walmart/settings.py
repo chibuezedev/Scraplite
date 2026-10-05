@@ -58,8 +58,6 @@ ITEM_PIPELINES = {
 
 # DATABASE_NAME='postgres'
 # DATABASE_USER='postgres'
-# DATABASE_PASSWORD='CuCBe4Tl9Oe9rm8n4Kcb'
-# DATABASE_HOST='db.cluster-cz5s9muunivd.us-east-1.rds.amazonaws.com'
 # DATABASE_PORT='5432'
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
