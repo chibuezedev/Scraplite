@@ -42,6 +42,8 @@ CONCURRENT_REQUESTS = 1
 
 
 # #MONGO CONNECTION
+
+# MONGO_URI = ''
 # MONGO_DATABASE = 'scrapy'
 
 # Configure item pipelines
